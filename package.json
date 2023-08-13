@@ -1,0 +1,12 @@
+{
+  "dependencies": {},
+  "devDependencies": {
+    "bun-types": "^0.7.3"
+  },
+  "name": "chat-project",
+  "module": "index.ts",
+  "type": "module",
+  "peerDependencies": {
+    "typescript": "^5.0.0"
+  }
+}
