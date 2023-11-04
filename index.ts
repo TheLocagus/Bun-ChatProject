@@ -1,28 +1,34 @@
-const chatHistory = [
+interface ChatHistoryDTO {
+    id: string;
+    author: string;
+    text: string;
+    time: number;
+}
+
+const chatHistory: ChatHistoryDTO[] = [
     {
         id: "1",
-        author: "User1",
-        message: "Witaj. Jak nazywa się pszczoła bez czoła?",
-        time: "02.09.2023 22:50",
+        author: "User",
+        text: "Dzień dobry ChatGPT!",
+        time: 1694376329000,
     },
     {
         id: "2",
-        author: "OpenAI",
-        message:
-            "Witam. Nie ma takiego gatunku pszczoły która nie posiada czoła. Proszę sformułuj pytanie inaczej.",
-        time: "02.09.2023 22:51",
+        author: "User",
+        text: "Odpowiedz mi na pytanie, Co znaczy skrót a11y?",
+        time: 1694376329000,
     },
     {
         id: "3",
-        author: "User1",
-        message: "Psz.",
-        time: "02.09.2023 22:52",
+        author: "AI",
+        text: "Witaj użytkownik! Skrót a11y oznacza - accessibility. A na początku, Y na końcu oraz 11 znaków pomiędzy. Czy masz jeszcze jakieś pytanie?",
+        time: 1694376329000,
     },
     {
-        id: "4",
-        author: "OpenAI",
-        message: "Nie rozumiem. Sformułuj pytanie inaczej.",
-        time: "02.09.2023 22:53",
+        id: "42",
+        author: "User",
+        text: "Bardzo ładnie. Dziękuję!",
+        time: 1694376999990,
     },
 ];
 
