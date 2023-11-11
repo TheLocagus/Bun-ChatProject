@@ -1,9 +1,4 @@
-interface ChatHistoryDTO {
-    id: string;
-    author: string;
-    text: string;
-    time: number;
-}
+import { ChatHistoryDTO, generateId } from "./utils";
 
 const chatHistory: ChatHistoryDTO[] = [
     {
@@ -52,9 +47,18 @@ Bun.serve({
         },
         message(ws, message) {
             const messageFromFrontend = message;
-            const newMessage = messageFromFrontend;
-            ws.publish("input-page", newMessage);
-            ws.send(newMessage);
+            const newMessage = JSON.stringify(messageFromFrontend);
+            const newId = generateId(chatHistory);
+
+            const dtoObject: ChatHistoryDTO = {
+                id: newId,
+                author: "User",
+                text: newMessage,
+                time: new Date().getTime(),
+            };
+
+            ws.publish("input-page", JSON.stringify(dtoObject));
+            ws.send(JSON.stringify(dtoObject));
         },
         close(ws) {
             const msg = `Closed page`;
