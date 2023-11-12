@@ -50,26 +50,39 @@ Bun.serve({
             const newMessage = JSON.stringify(messageFromFrontend);
             const newId = generateId(chatHistory);
 
-            const dtoObject: ChatHistoryDTO = {
-                id: newId,
-                author: "User",
-                text: newMessage,
-                time: new Date().getTime(),
-            };
+            const dtoObject: [ChatHistoryDTO] = [
+                {
+                    id: newId,
+                    author: "User",
+                    text: newMessage,
+                    time: new Date().getTime(),
+                },
+            ];
 
             ws.publish("input-page", JSON.stringify(dtoObject));
             ws.send(JSON.stringify(dtoObject));
+
+            const gptTypingStart = ["typing"];
+            const gptTypingEnd = ["finished-typing"];
+
+            ws.send(JSON.stringify(gptTypingStart));
+
+            //TODO: implement OpenAI response
+
+            setTimeout(() => {
+                ws.send(JSON.stringify(gptTypingEnd));
+            }, 3000);
         },
         close(ws) {
             const msg = `Closed page`;
             ws.unsubscribe("input-page");
             ws.publish("input-page", msg);
         },
-    }, // handlers
+    },
 });
 
 const socket = new WebSocket("ws://localhost:3000/chat");
 
 socket.addEventListener("message", (event) => {
-    console.log(event.data);
+    console.log("message event");
 });
